@@ -232,21 +232,22 @@ pimcore.object.tags.localizedfields = Class.create(pimcore.object.tags.abstract,
                             }
 
                             try {
-                                var panelBodies = this.tabPanel.items.first().getEl().query(".x-panel-body");
-                                var panelBody = Ext.get(panelBodies[0]);
-                                panelBody.applyStyles("height: auto;");
-                                var height = panelBody.getHeight();
-                                if (height > 0) {
-                                    // 100 is just a fixed value which seems to be ok(caused by title bar, tabs itself, ... )
-                                    this.component.setHeight(height+100);
-                                    clearInterval(this.tabPanelAdjustInterval);
-
-                                    //this.tabPanel.getEl().applyStyles("position:relative;");
-                                    this.component.doLayout();
-                                    this.component.heightAlreadyFixed = true;
-
+                                if (this.tabPanel.items.first()) {
+                                    var panelBodies = this.tabPanel.items.first().getEl().query(".x-panel-body");
+                                    var panelBody = Ext.get(panelBodies[0]);
+                                    panelBody.applyStyles("height: auto;");
+                                    var height = panelBody.getHeight();
+                                    if (height > 0) {
+                                        // 100 is just a fixed value which seems to be ok(caused by title bar, tabs itself, ... )
+                                        this.component.setHeight(height+100);
+                                        clearInterval(this.tabPanelAdjustInterval);
+    
+                                        //this.tabPanel.getEl().applyStyles("position:relative;");
+                                        this.component.doLayout();
+                                        this.component.heightAlreadyFixed = true;
+    
+                                    }
                                 }
-
                             } catch (e) {
                                 console.log(e);
                             }
